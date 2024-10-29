@@ -34,7 +34,7 @@ ALU t1(
 .ALUResult(ALUResult)
 );
 
-display t2(.data_in(prode_register_file), 
+display t2(.data_in(ALUResult), 
 .segments(display_led));
 
 endmodule
