@@ -3,8 +3,7 @@ module data_memory(
     input logic [31:0] A,    // address
     input logic [31:0] WD,   // input data
     input logic WE,          // enable input
-    output logic [31:0] RD,  // output data
-    output logic [31:0] prode // to check the data in data memory
+    output logic [31:0] RD   // output data
 );
     logic [31:0] memory [0:255]; // 256 words of 32-bit memory
 
@@ -30,5 +29,4 @@ module data_memory(
 
     // Read operation
     assign RD = memory[A];
-    assign prode = memory[A]; // Debug output to check the data
 endmodule
