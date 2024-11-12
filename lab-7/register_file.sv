@@ -8,7 +8,7 @@ module register_file (
     input logic WE3,  // Write enable
     output logic [31:0] RD1,  // First read data
     output logic [31:0] RD2,  // Second read data
-    output logic [31:0] prode  // Probe for display
+    output logic [31:0] probe  // Probe for display
 );
 
     logic [31:0] rf_regs [31:0];  // 32 registers each 32 bits wide
@@ -31,7 +31,7 @@ module register_file (
 	 // assign RD1 = (A1 != 0) ? rf_regs[A1] : 0;
 	 // assign RD2 = (A2 != 0) ? rf_regs[A2] : 0;
 	 
-	 assign prode = rf_regs[A1];  // Probe the register content for display
+	 assign probe = rf_regs[A1];  // Probe the register content for display
 
 endmodule
 
