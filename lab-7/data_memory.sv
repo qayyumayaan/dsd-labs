@@ -8,13 +8,13 @@ module data_memory(
 );
     logic [31:0] memory [0:255]; // 256 words of 32-bit memory
 
-    // Initialize memory
-    initial begin
-        integer i;
-        for (i = 0; i < 256; i = i + 1) begin
-            memory[i] = 32'b0;
-        end
-    end
+    // // Initialize memory
+    // initial begin
+    //     integer i;
+    //     for (i = 0; i < 256; i = i + 1) begin
+    //         memory[i] = 32'b0;
+    //     end
+    // end
 
     // Write operation
     always_ff @(posedge clk or negedge rst) begin
