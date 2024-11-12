@@ -18,7 +18,7 @@ module top(
 
     // Instruction selection based on `sw`
     logic [31:0] inst_ex;
-    assign inst_ex = (sw == 1) ? inst_lw : (sw == 2) ? inst_sw : inst_0;
+    assign inst_ex = (sw == 2'b01) ? inst_lw : (sw == 2'b10) ? inst_sw : inst_0;
 
     // Control signals extracted from instruction
     logic MemtoReg, ALUSrc, RegDst, WE_data_memory;
@@ -86,7 +86,7 @@ module top(
         .WD(RD2),            // data to write (from rt register)
         .WE(WE_data_memory), // write enable (1 for SW, 0 otherwise)
         .RD(data_memory_out) // Output data for MemtoReg MUX
-		  .probe(probe_data_memory)
+		.probe(probe_data_memory)
     );
 
     // MUX for MemtoReg
