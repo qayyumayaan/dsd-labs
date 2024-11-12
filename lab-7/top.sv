@@ -28,6 +28,7 @@ module top(
     assign WE_data_memory = inst_ex[31:26] == 6'b010100; // 1 for SW
 
     // Register and Immediate Signals
+    logic [2:0] ALUControl = 3'b010;
     logic [31:0] SignImm;
     logic [31:0] ALUSrc_out;
     logic [4:0] RegDst_out;
@@ -74,7 +75,7 @@ module top(
     ALU alu(
         .SrcA(RD1),
         .SrcB(ALUSrc_out),
-        .ALUControl(3'b010), // ADD operation for address calculation
+        .ALUControl(ALUControl), // ADD operation for address calculation
         .ALUResult(ALUResult)
     );
 
