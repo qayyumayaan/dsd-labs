@@ -32,7 +32,7 @@ module top(
     logic [31:0] SignImm;
     logic [31:0] ALUSrc_out;
     logic [4:0] RegDst_out;
-    logic [31:0] data_memory_out;  // New signal for data_memory output
+    logic [31:0] RD;  // New signal for data_memory output
     logic [31:0] MemtoReg_out;
     
     // Sign extend the immediate value
@@ -86,7 +86,7 @@ module top(
         .A(ALUResult),       // address from ALU result
         .WD(RD2),            // data to write (from rt register)
         .WE(WE_data_memory), // write enable (1 for SW, 0 otherwise)
-        .RD(data_memory_out) // Output data for MemtoReg MUX
+        .RD(RD) // Output data for MemtoReg MUX
 		.probe(probe_data_memory)
     );
 
@@ -94,7 +94,7 @@ module top(
     MUX_MemtoReg mux_memtoreg(
         .MemtoReg(MemtoReg),
         .ALUResult(ALUResult),
-        .RD(data_memory_out),   // data from memory
+        .RD(RD),   // data from memory
         .MemtoReg_out(MemtoReg_out)
     );
 
