@@ -30,5 +30,5 @@ module data_memory(
 
     // Read operation
     assign RD = memory[A];
-	 assign probe = mem[1];
+	 assign probe = memory[1];
 endmodule
