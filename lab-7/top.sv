@@ -48,7 +48,7 @@ module top(
         .A2(inst_ex[20:16]), // rt
         .A3(RegDst_out),     // destination register
         .WD3(MemtoReg_out),  // data to write to register file
-        .WE3(MemtoReg),      // write enable (1 for LW, 0 for SW)
+        .WE3(1),      // write enable
         .RD1(RD1),
         .RD2(RD2),
         .probe(probe_register_file)
@@ -86,6 +86,7 @@ module top(
         .WD(RD2),            // data to write (from rt register)
         .WE(WE_data_memory), // write enable (1 for SW, 0 otherwise)
         .RD(data_memory_out) // Output data for MemtoReg MUX
+		  .probe(probe_data_memory)
     );
 
     // MUX for MemtoReg
