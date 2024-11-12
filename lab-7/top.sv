@@ -30,7 +30,7 @@ module top(
     // Register and Immediate Signals
     logic [2:0] ALUControl = 3'b010;
     logic [31:0] SignImm;
-    logic [31:0] ALUSrc_out;
+    logic [31:0] SrcB;
     logic [4:0] RegDst_out;
     logic [31:0] RD;  // New signal for data_memory output
     logic [31:0] MemtoReg_out;
@@ -60,7 +60,7 @@ module top(
         .ALUSrc(ALUSrc),
         .RD2(RD2),
         .SignImm(SignImm),
-        .ALUSrc_out(ALUSrc_out)
+        .ALUSrc_out(SrcB)
     );
 
     // MUX for RegDst
@@ -74,7 +74,7 @@ module top(
     // ALU
     ALU alu(
         .SrcA(RD1),
-        .SrcB(ALUSrc_out),
+        .SrcB(SrcB),
         .ALUControl(ALUControl), // ADD operation for address calculation
         .ALUResult(ALUResult)
     );
