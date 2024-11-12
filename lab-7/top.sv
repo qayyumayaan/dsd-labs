@@ -5,6 +5,8 @@ module top(
     output logic [31:0] RD1, RD2, // output for pre-lab simulation
     output logic [31:0] probe_register_file, // output for pre-lab simulation
     output logic [31:0] probe_data_memory,   // probe for data memory
+    output logic [6:0] display_led, // output for in-lab
+    output logic [6:0] display_led2 // secondary output
 );
 
     // Define example I-type instructions for testing LW and SW
