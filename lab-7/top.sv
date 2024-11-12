@@ -3,8 +3,8 @@ module top(
     input logic [1:0] sw, // address selector for instructions
     output logic [31:0] ALUResult, // output for pre-lab simulation
     output logic [31:0] RD1, RD2, // output for pre-lab simulation
-    output logic [31:0] prode_register_file, // output for pre-lab simulation
-    output logic [6:0] display_led // output for in-lab
+    output logic [31:0] probe_register_file, // output for pre-lab simulation
+    output logic [31:0] probe_data_memory,   // probe for data memory
 );
 
     // Define example I-type instructions for testing LW and SW
@@ -49,7 +49,7 @@ module top(
         .WE3(MemtoReg),      // write enable (1 for LW, 0 for SW)
         .RD1(RD1),
         .RD2(RD2),
-        .prode(prode_register_file)
+        .probe(probe_register_file)
     );
 
     // MUX for ALUSrc
