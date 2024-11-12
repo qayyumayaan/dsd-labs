@@ -9,14 +9,14 @@ module top(
 
     // Define example I-type instructions for testing LW and SW
     logic [31:0] inst_0 = 32'b0;  // No-op instruction
-    logic [31:0] inst_1 = 32'b010101_00000_00001_0000_0000_0000_0101; 
     // LW: Load data_memory[5] -> rf_regs[1]
-    logic [31:0] inst_2 = 32'b010100_00000_00110_0000_0000_0000_0010; 
     // SW: Store rf_regs[6] -> data_memory[2]
+    logic [31:0] inst_lw = 32'b010101_00000_00001_0000_0000_0000_0101; 
+    logic [31:0] inst_sw = 32'b010100_00000_00110_0000_0000_0000_0010; 
 
     // Instruction selection based on `sw`
     logic [31:0] inst_ex;
-    assign inst_ex = (sw == 1) ? inst_1 : (sw == 2) ? inst_2 : inst_0;
+    assign inst_ex = (sw == 1) ? inst_lw : (sw == 2) ? inst_sw : inst_0;
 
     // Control signals extracted from instruction
     logic MemtoReg, ALUSrc, RegDst, WE_data_memory;
