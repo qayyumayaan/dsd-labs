@@ -17,8 +17,8 @@ module data_memory(
     end
 
     // Write operation
-    always_ff @(posedge clk or posedge rst) begin
-        if (rst) begin
+    always_ff @(posedge clk or negedge rst) begin
+        if (~rst) begin // Active low reset
             integer i;
             for (i = 0; i < 256; i = i + 1) begin
                 memory[i] <= 32'b0;
