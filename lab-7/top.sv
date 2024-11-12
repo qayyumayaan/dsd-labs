@@ -99,7 +99,36 @@ module top(
         .MemtoReg_out(MemtoReg_out)
     );
 
-    // Display output (for in-lab display on 7-segment)
+    // Detect sw changes
+    logic [1:0] prev_sw;
+    logic sw_changed;
+
+    always_ff @(posedge clk or negedge rst) begin
+        if (~rst) begin
+            prev_sw <= 2'b00;
+        end else begin
+            prev_sw <= sw;
+        end
+    end
+
+    assign sw_changed = (sw != prev_sw);
+
+    // Latching RD2 and assigning ALUResult directly
+    logic [31:0] latched_RD2;
+
+    always_ff @(posedge clk or negedge rst) begin
+        if (~rst) begin
+            latched_RD2 <= 32'b0;
+        end else if (sw_changed) begin
+            latched_RD2 <= register_RD2;
+        end
+    end
+
+    // Use latched_RD2 as RD2 output and ALUResult output
+    assign RD2 = latched_RD2;
+    assign ALUResult = latched_RD2;
+
+    // Display ALUResult on the 7-segment display (display_led)
     display t1(
         .data_in(ALUResult),    // Updated to pass ALUResult directly
         .segments(display_led)
