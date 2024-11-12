@@ -20,21 +20,21 @@ module top(
     logic [31:0] inst_ex;
     assign inst_ex = (sw == 2'b01) ? inst_lw : (sw == 2'b10) ? inst_sw : inst_0;
 
+    // Register and Immediate Signals
+    logic [4:0] RegDst_out;
+    logic [31:0] SrcB;
+    logic [31:0] MemtoReg_out;
+    logic [31:0] RD;
+    logic [31:0] SignImm;
+
     // Control signals extracted from instruction
     logic MemtoReg, ALUSrc, RegDst, WE_data_memory;
-    assign MemtoReg = inst_ex[31:26] == 6'b010101; // 1 for LW
-    assign ALUSrc = 1; // Always 1 for I-type instructions
-    assign RegDst = 0; // Always 0 for I-type (dest is `rt`)
-    assign WE_data_memory = inst_ex[31:26] == 6'b010100; // 1 for SW
-
-    // Register and Immediate Signals
     logic [2:0] ALUControl = 3'b010;
-    logic [31:0] SignImm;
-    logic [31:0] SrcB;
-    logic [4:0] RegDst_out;
-    logic [31:0] RD;  // New signal for data_memory output
-    logic [31:0] MemtoReg_out;
-    
+    assign WE_data_memory = inst_ex[29];
+    assign RegDst = inst_ex[31];
+    assign ALUSrc = inst_ex[31];
+    assign MemtoReg = inst_ex[30];
+
     // Sign extend the immediate value
     sign_extend sign_ext(
         .Imm(inst_ex[15:0]),
@@ -86,8 +86,8 @@ module top(
         .A(ALUResult),       // address from ALU result
         .WD(RD2),            // data to write (from rt register)
         .WE(WE_data_memory), // write enable (1 for SW, 0 otherwise)
-        .RD(RD) // Output data for MemtoReg MUX
-		.probe(probe_data_memory)
+        .RD(RD), // Output data for MemtoReg MUX
+        .probe(probe_data_memory)
     );
 
     // MUX for MemtoReg
