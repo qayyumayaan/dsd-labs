@@ -95,9 +95,14 @@ module top(
     );
 
     // Display output (for in-lab display on 7-segment)
-    display display_unit(
-        .data_in(ALUResult),
+    display t1(
+        .data_in(probe_register_file),
         .segments(display_led)
+    );
+    
+    display t2(
+        .data_in(probe_data_memory),
+        .segments(display_led2)
     );
 
 endmodule
