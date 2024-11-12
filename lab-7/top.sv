@@ -14,7 +14,7 @@ module top(
     // LW: Load data_memory[5] -> rf_regs[1]
     // SW: Store rf_regs[6] -> data_memory[2]
     logic [31:0] inst_lw = 32'b010101_00000_00001_0000_0000_0000_0101; 
-    logic [31:0] inst_sw = 32'b010100_00000_00110_0000_0000_0000_0010; 
+    logic [31:0] inst_sw = 32'b010100_00000_01000_0000_0000_0000_0010; 
 
     // Instruction selection based on `sw`
     logic [31:0] inst_ex;
