@@ -13,9 +13,8 @@ module register_file (
 
     logic [31:0] rf_regs [31:0];  // 32 registers each 32 bits wide
 
-    // Synchronous process to initialize or update the register file
     always_ff @(posedge clk or negedge rst) begin
-        if (~rst) begin  // Active-low reset
+        if (!rst) begin  // Active-low reset
             for (int i = 0; i < 32; i++) begin
                 rf_regs[i] <= i;  // Initialize registers with their index
             end
@@ -24,14 +23,8 @@ module register_file (
         end
     end
 
-    // Read registers asynchronously
     assign RD1 = rf_regs[A1];
     assign RD2 = rf_regs[A2];
-    
-	 // assign RD1 = (A1 != 0) ? rf_regs[A1] : 0;
-	 // assign RD2 = (A2 != 0) ? rf_regs[A2] : 0;
-	 
-	 assign probe = rf_regs[A1];  // Probe the register content for display
+    assign probe = rf_regs[A1];  // Probe the register content for display
 
 endmodule
-
