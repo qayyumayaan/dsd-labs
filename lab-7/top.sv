@@ -57,7 +57,7 @@ module top(
     // MUX for ALUSrc
     MUX_ALUSrc mux_alusrc(
         .ALUSrc(ALUSrc),
-        .ReadData2(RD2),
+        .RD2(RD2),
         .SignImm(SignImm),
         .ALUSrc_out(ALUSrc_out)
     );
