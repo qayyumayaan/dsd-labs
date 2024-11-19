@@ -1,12 +1,12 @@
 module magnitude (
-    input logic signed [15:0] real_in[7:0], // Real parts of FFT output
-    input logic signed [15:0] imag_in[7:0], // Imaginary parts of FFT output
-    output logic [15:0] magnitude_out[7:0]  // Magnitude output
+    input logic signed [15:0] real_in[15:0], // Real parts of FFT output
+    input logic signed [15:0] imag_in[15:0], // Imaginary parts of FFT output
+    output logic [15:0] magnitude_out[15:0]  // Magnitude output
 );
 
     // Calculate magnitude for each complex input
     always_comb begin
-        for (int i = 0; i < 8; i++) begin
+        for (int i = 0; i < 16; i++) begin
             // Declare abs_real and abs_imag here to avoid non-constant expression errors
             logic signed [15:0] abs_real;
             logic signed [15:0] abs_imag;
