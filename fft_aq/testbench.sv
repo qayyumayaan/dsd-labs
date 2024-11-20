@@ -32,7 +32,7 @@ module testbench();
         reset = 1;
         #10 reset = 0;
 
-        // SystemVerilog-compatible inputs for testbench
+        // Initialize testbench inputs in integer format
         inputs = '{
             16'h0000,
             16'h030F,
@@ -52,8 +52,20 @@ module testbench();
             16'hFCF0
         };
 
-        // Wait for results
+        // Print the inputs
+        $display("Input values:");
+        for (int i = 0; i < 16; i++) begin
+            $display("Input[%0d]: %0d", i, inputs[i]);
+        end
+
+        // Wait for the computation to complete
         #100;
+
+        // Print the outputs
+        $display("\nMagnitude outputs:");
+        for (int i = 0; i < 16; i++) begin
+            $display("Output[%0d]: %0d", i, magnitude_out[i]);
+        end
 
         // End simulation
         $finish;
