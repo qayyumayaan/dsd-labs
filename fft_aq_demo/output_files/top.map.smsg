@@ -1,0 +1,4 @@
+Info (10281): Verilog HDL Declaration information at top.sv(11): object "x0" differs only in case from object "X0" in the same scope
+Info (10281): Verilog HDL Declaration information at top.sv(11): object "x1" differs only in case from object "X1" in the same scope
+Info (10281): Verilog HDL Declaration information at fft2_point.sv(2): object "x0" differs only in case from object "X0" in the same scope
+Info (10281): Verilog HDL Declaration information at fft2_point.sv(3): object "x1" differs only in case from object "X1" in the same scope
