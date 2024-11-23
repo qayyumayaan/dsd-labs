@@ -33,8 +33,8 @@ module tb;
         for (i = 0; i < N; i++) begin
             max_input_value = (x_int[i] > max_input_value) ? x_int[i] : max_input_value;
         end
-        scaling_factor_num = 9 * (1 << Q);
-        scaling_factor_den = 10 * max_input_value;
+        scaling_factor_num = (1 << Q); // Scale to the maximum representable value
+        scaling_factor_den = max_input_value;
 
         for (i = 0; i < N; i++) begin
             scaled_value_int = (x_int[i] * scaling_factor_num) / scaling_factor_den;
