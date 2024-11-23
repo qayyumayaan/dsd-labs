@@ -8,10 +8,9 @@ module tb;
     parameter DATA_WIDTH = 16;
 
     // Test input data
-    integer x_int [0:N-1] = '{
-        2404, 4756, 7005, 9102, 11002, 12665, 14053, 15136,
-        15892, 16305, 16364, 16069, 15426, 14449, 13159, 11585
-    };
+	integer x_int [0:N-1] = '{
+		 0, 13328, 24351, 31163, 32587, 28377, 19260, 6813, -6813, -19260, -28377, -32587, -31163, -24351, -13328, 0
+	};
 
     logic signed [DATA_WIDTH-1:0] x_real [0:N-1];
     logic signed [DATA_WIDTH-1:0] x_imag [0:N-1];
