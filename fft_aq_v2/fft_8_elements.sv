@@ -48,7 +48,7 @@ module fft_8_elements (
     // Define negative imaginary unit (-j) in Q1.15 format
     localparam complex_t neg_j = '{re: 16'sd0, im: -16'sd32768};
 
-    // Function for complex multiplication in Q1.15 format
+    // Function for complex multiplication in Q1.15 format with saturation
     function automatic complex_t complex_mult (complex_t a, complex_t b);
         logic signed [31:0] re_part;
         logic signed [31:0] im_part;
@@ -56,9 +56,11 @@ module fft_8_elements (
         begin
             re_part = (a.re * b.re - a.im * b.im);
             im_part = (a.re * b.im + a.im * b.re);
-            // Scale back to Q1.15 format by shifting right by 15 bits
-            result.re = re_part >>> 15;
-            result.im = im_part >>> 15;
+            // Scale back to Q1.15 format by shifting right by 15 bits with saturation
+            result.re = (re_part >>> 15 > 32767) ? 32767 : 
+                        (re_part >>> 15 < -32768) ? -32768 : re_part >>> 15;
+            result.im = (im_part >>> 15 > 32767) ? 32767 : 
+                        (im_part >>> 15 < -32768) ? -32768 : im_part >>> 15;
             complex_mult = result;
         end
     endfunction
